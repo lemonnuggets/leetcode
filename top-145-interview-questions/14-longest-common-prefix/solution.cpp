@@ -23,7 +23,7 @@ int test(vector<string>& x) {
   int duration;
 
   cout << "\nX = ";
-  Output::vector(x);
+  Output::vectorPrint(x);
   cout << endl;
 
   t.startClock();

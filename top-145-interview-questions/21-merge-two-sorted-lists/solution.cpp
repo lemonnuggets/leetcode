@@ -35,10 +35,10 @@ int test(vector<int>& x, vector<int>& y) {
   ListNode* y_list = new ListNode(y);
 
   cout << "\nX = ";
-  Output::list(x_list);
+  Output::listPrint(x_list);
   cout << endl;
   cout << "Y = ";
-  Output::list(y_list);
+  Output::listPrint(y_list);
   cout << endl;
 
   t.startClock();
@@ -46,7 +46,7 @@ int test(vector<int>& x, vector<int>& y) {
   duration = t.stopClock();
 
   cout << "\tTime Taken: " << duration << "\t\tMerged List = \t";
-  Output::list(merged_list);
+  Output::listPrint(merged_list);
   cout << endl;
 
   return 0;

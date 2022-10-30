@@ -21,10 +21,10 @@ int test(vector<int>& x, int m, vector<int>& y, int n) {
   int duration;
 
   cout << "\nX (m = " << m << ") = \t";
-  Output::vector(x);
+  Output::vectorPrint(x);
   cout << endl;
   cout << "Y (n = " << n << ") = \t";
-  Output::vector(y);
+  Output::vectorPrint(y);
   cout << endl;
 
   t.startClock();
@@ -32,7 +32,7 @@ int test(vector<int>& x, int m, vector<int>& y, int n) {
   duration = t.stopClock();
 
   cout << "\tMerged Array, X = \t";
-  Output::vector(x);
+  Output::vectorPrint(x);
   cout << "\t\t\t\tTime Taken: " << duration << endl;
 
   return 0;

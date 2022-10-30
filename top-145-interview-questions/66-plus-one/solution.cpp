@@ -52,7 +52,7 @@ int test(vector<int>& x) {
   int duration;
 
   cout << "\nX (size = " << x.size() << ") = \t";
-  Output::vector(x);
+  Output::vectorPrint(x);
   cout << endl;
 
   vector<int> result;
@@ -62,7 +62,7 @@ int test(vector<int>& x) {
   duration = t.stopClock();
 
   cout << "\tPlus One (mine), result = \t";
-  Output::vector(result);
+  Output::vectorPrint(result);
   cout << "\t\t\t\tTime Taken: " << duration << endl;
 
   t.startClock();
@@ -71,7 +71,7 @@ int test(vector<int>& x) {
   duration = t.stopClock();
 
   cout << "\tPlus One (optimal), result = \t";
-  Output::vector(result);
+  Output::vectorPrint(result);
   cout << "\t\t\t\tTime Taken: " << duration << endl;
   return 0;
 }

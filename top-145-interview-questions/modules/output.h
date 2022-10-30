@@ -45,8 +45,33 @@ class Output {
   }
 
  public:
-  template <typename T>
-  static void vector(vector<T> a) {
+  template <typename PrinitableType>
+  static void pairPrint(pair<PrinitableType, PrinitableType> a) {
+    cout << "<" << a.first << ", " << a.second << ">";
+  }
+  template <typename PrinitableType, typename TypeX>
+  static void pairPrint(pair<TypeX, TypeX> a,
+                        function<PrinitableType(TypeX)> getVal) {
+    cout << "<" << getVal(a.first) << ", " << getVal(a.second) << ">";
+  }
+  template <typename PrinitableType, typename TypeX>
+  static void pairPrint(pair<TypeX, TypeX> a,
+                        function<PrinitableType(TypeX)> getVal,
+                        function<bool(TypeX)> canGetVal) {
+    cout << "<";
+    if (canGetVal(a.first))
+      cout << getVal(a.first);
+    else
+      cout << "_";
+    cout << ", ";
+    if (canGetVal(a.second))
+      cout << getVal(a.second);
+    else
+      cout << "_";
+    cout << ">";
+  }
+  template <typename PrintableType>
+  static void vectorPrint(vector<PrintableType> a) {
     cout << "[";
     for (auto it = a.begin(); it != a.end(); it++) {
       if (it == a.end() - 1) {
@@ -57,8 +82,8 @@ class Output {
     }
     cout << "]";
   }
-  static void tree(TreeNode* root) { treePrinter(root, nullptr, false); }
-  static void list(ListNode* a) {
+  static void treePrint(TreeNode* root) { treePrinter(root, nullptr, false); }
+  static void listPrint(ListNode* a) {
     string seperator = " -> ";
     ListNode* curr = a;
     while (curr->next != nullptr) {

@@ -17,7 +17,7 @@ int test(vector<int>& x) {
   int duration;
 
   cout << "\nX (size = " << x.size() << ") = \t";
-  Output::vector(x);
+  Output::vectorPrint(x);
   cout << endl;
 
   t.startClock();
