@@ -1,35 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-using namespace std::chrono;
-class Timer {
-  high_resolution_clock::time_point start;
-  high_resolution_clock::duration duration;
-
- public:
-  high_resolution_clock::time_point startClock() {
-    this->start = high_resolution_clock::now();
-    return this->start;
-  }
-  high_resolution_clock::rep stopClock() {
-    high_resolution_clock::time_point stop = high_resolution_clock::now();
-    this->duration = duration_cast<microseconds>(stop - this->start);
-    return this->duration.count();
-  }
-};
-class Output {
- public:
-  template <typename T>
-  static void vector(vector<T> a) {
-    for (auto it = a.begin(); it != a.end(); it++) {
-      if (it == a.end() - 1) {
-        cout << *it;
-      } else {
-        cout << *it << "\t";
-      }
-    }
-  }
-};
-
+#include "../modules/index.h"
 class Solution {
  public:
   void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {

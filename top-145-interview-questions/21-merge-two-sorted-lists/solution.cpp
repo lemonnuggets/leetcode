@@ -1,23 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-class ListNode {
- public:
-  int val;
-  ListNode* next;
-  ListNode() {
-    this->val = 0;
-    this->next = nullptr;
-  }
-  ListNode(int x) {
-    this->val = x;
-    this->next = nullptr;
-  }
-  ListNode(int x, ListNode* next) {
-    this->val = x;
-    this->next = next;
-  }
-};
-
+#include "../modules/index.h"
 class Solution {
  public:
   ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
@@ -45,7 +26,41 @@ class Solution {
     return newHead;
   }
 };
-int main() {
+int test(vector<int>& x, vector<int>& y) {
   Solution s = Solution();
+  Timer t = Timer();
+  int duration;
+
+  ListNode* x_list = new ListNode(x);
+  ListNode* y_list = new ListNode(y);
+
+  cout << "\nX = ";
+  Output::list(x_list);
+  cout << endl;
+  cout << "Y = ";
+  Output::list(y_list);
+  cout << endl;
+
+  t.startClock();
+  ListNode* merged_list = s.mergeTwoLists(x_list, y_list);
+  duration = t.stopClock();
+
+  cout << "\tTime Taken: " << duration << "\t\tMerged List = \t";
+  Output::list(merged_list);
+  cout << endl;
+
+  return 0;
+}
+int main() {
+  vector<int> nums1, nums2;
+
+  nums1 = {1, 2, 3};
+  nums2 = {2, 5, 6};
+  test(nums1, nums2);
+
+  nums1 = {1};
+  nums2 = {};
+  test(nums1, nums2);
+
   return 0;
 }

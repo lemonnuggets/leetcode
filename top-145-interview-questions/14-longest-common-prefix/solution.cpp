@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../modules/index.h"
 class Solution {
  public:
   string longestCommonPrefix(vector<string>& strs) {
@@ -18,16 +17,31 @@ class Solution {
     return prefix;
   }
 };
+int test(vector<string>& x) {
+  Solution s = Solution();
+  Timer t = Timer();
+  int duration;
+
+  cout << "\nX = ";
+  Output::vector(x);
+  cout << endl;
+
+  t.startClock();
+  string prefix = s.longestCommonPrefix(x);
+  duration = t.stopClock();
+
+  cout << "\tLongest Common Prefix = " << prefix
+       << "\t\tTime Taken: " << duration << endl;
+  return 0;
+}
 int main() {
   Solution s = Solution();
-  vector<string> ra1{"hello", "help", "heaven", "heathen"};
-  vector<string> ra2{"flower", "flow", "flight"};
-  vector<string> ra3{"dog", "racecar", "car"};
-  // s.longestCommonPrefix(ra1);
-  // s.longestCommonPrefix(ra2);
-  // s.longestCommonPrefix(ra3);
-  cout << s.longestCommonPrefix(ra1) << endl;
-  cout << s.longestCommonPrefix(ra2) << endl;
-  cout << s.longestCommonPrefix(ra3) << endl;
+  vector<string> ra;
+  ra = {"hello", "help", "heaven", "heathen"};
+  test(ra);
+  ra = {"flower", "flow", "flight"};
+  test(ra);
+  ra = {"dog", "racecar", "car"};
+  test(ra);
   return 0;
 }

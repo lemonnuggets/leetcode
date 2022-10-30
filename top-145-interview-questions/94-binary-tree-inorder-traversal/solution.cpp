@@ -67,6 +67,40 @@ int test(vector<int>& x) {
   cout << "\t\t\t\tTime Taken: " << duration << endl;
   return 0;
 }
+int test(vector<int>& x) {
+  Solution s = Solution();
+  Timer t = Timer();
+  int duration;
+
+  cout << "\nX (size = " << x.size() << ") = \t";
+  Output::vector(x);
+  cout << endl;
+  TreeNode* root;
+  if (x.size() > 0)
+    root = new TreeNode(x);
+  else
+    root = nullptr;
+  cout << "Tree from x, root = " << endl;
+  Output::tree(root);
+
+  vector<int> result;
+  t.startClock();
+  result = s.inorderTraversalRecursive(root);
+  duration = t.stopClock();
+
+  cout << "\tInorder Traversal (recursive), result = \t";
+  Output::vector(result);
+  cout << "\t\t\t\tTime Taken: " << duration << endl;
+
+  t.startClock();
+  result = s.inorderTraversalIterative(root);
+  duration = t.stopClock();
+
+  cout << "\tInorder Traversal (iterative), result = \t";
+  Output::vector(result);
+  cout << "\t\t\t\tTime Taken: " << duration << endl;
+  return 0;
+}
 int main() {
   vector<int> x;
   x = {1, INVALID_VALUE, 2, 3};

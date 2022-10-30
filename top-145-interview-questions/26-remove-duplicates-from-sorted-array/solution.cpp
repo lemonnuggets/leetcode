@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../modules/index.h"
 class Solution {
  public:
   int removeDuplicates(vector<int>& nums) {
@@ -12,20 +11,29 @@ class Solution {
     return newSize;
   }
 };
-string vecString(vector<int>& nums, int k) {
-  string result = "";
-  for (int i = 0; i < k; i++) {
-    result += to_string(nums[i]) + " ";
-  }
-  return result;
+int test(vector<int>& x) {
+  Solution s = Solution();
+  Timer t = Timer();
+  int duration;
+
+  cout << "\nX (size = " << x.size() << ") = \t";
+  Output::vector(x);
+  cout << endl;
+
+  t.startClock();
+  int r1 = s.removeDuplicates(x);
+  duration = t.stopClock();
+  cout << "\tMyClimbStairs = " << r1 << "\t\t\t\tTime Taken: " << duration
+       << endl;
+
+  return 0;
 }
 int main() {
   Solution s = Solution();
-  vector<int> ra1{1, 1, 2};
-  int k1 = s.removeDuplicates(ra1);
-  vector<int> ra2{0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
-  int k2 = s.removeDuplicates(ra2);
-  cout << k1 << "\t" << vecString(ra1, k1) << endl;
-  cout << k2 << "\t" << vecString(ra2, k2) << endl;
+  vector<int> x;
+  x = {1, 1, 2};
+  test(x);
+  x = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
+  test(x);
   return 0;
 }

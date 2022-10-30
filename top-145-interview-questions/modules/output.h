@@ -58,4 +58,13 @@ class Output {
     cout << "]";
   }
   static void tree(TreeNode* root) { treePrinter(root, nullptr, false); }
+  static void list(ListNode* a) {
+    string seperator = " -> ";
+    ListNode* curr = a;
+    while (curr->next != nullptr) {
+      cout << curr->val << seperator;
+      curr = curr->next;
+    }
+    cout << curr->val;
+  }
 };

@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include "../modules/index.h"
 // using stack data structure from c++ stl
 class Solution {
  public:
@@ -28,11 +27,24 @@ class Solution {
     return true;
   }
 };
-int main(int argc, char const *argv[]) {
+int test(string str) {
   Solution s = Solution();
-  cout << s.isValid("()") << endl;
-  cout << s.isValid("()[]{}") << endl;
-  cout << s.isValid("(]") << endl;
-  cout << s.isValid("((()))]") << endl;
+  Timer t = Timer();
+  int duration;
+
+  cout << "\nStr = " << str << endl;
+
+  t.startClock();
+  bool valid = s.isValid(str);
+  duration = t.stopClock();
+
+  cout << "\tTime Taken: " << duration << "\t\tisValid = " << valid << endl;
+  return 0;
+}
+int main(int argc, char const *argv[]) {
+  test("()");
+  test("()[]{}");
+  test("(]");
+  test("((()))]");
   return 0;
 }
