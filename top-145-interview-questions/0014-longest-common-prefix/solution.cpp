@@ -1,4 +1,4 @@
-#include "../modules/index.h"
+#include "../../modules/index.h"
 class Solution {
  public:
   string longestCommonPrefix(vector<string>& strs) {

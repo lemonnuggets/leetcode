@@ -1,4 +1,4 @@
-#include "../modules/index.h"
+#include "../../modules/index.h"
 class Solution {
  public:
   int removeDuplicates(vector<int>& nums) {

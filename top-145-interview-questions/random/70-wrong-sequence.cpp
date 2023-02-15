@@ -1,6 +1,6 @@
 // https://oeis.org/A252864
 // Due to a mistake, I ended up writing code to generate the above sequence
-// instead of the sequence required in question 70-climbing-stairs
+// instead of the sequence required in question 0070-climbing-stairs
 
 #include <bits/stdc++.h>
 using namespace std;

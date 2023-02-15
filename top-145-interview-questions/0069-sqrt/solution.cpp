@@ -1,5 +1,4 @@
-
-#include "../modules/index.h"
+#include "../../modules/index.h"
 class Solution {
  public:
   int sq(int x) { return x * x; }
