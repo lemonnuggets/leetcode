@@ -45,18 +45,18 @@ class Output {
   }
 
  public:
-  template <typename PrinitableType>
-  static void pairPrint(pair<PrinitableType, PrinitableType> a) {
+  template <typename PrintableType>
+  static void pairPrint(pair<PrintableType, PrintableType> a) {
     cout << "<" << a.first << ", " << a.second << ">";
   }
-  template <typename PrinitableType, typename TypeX>
+  template <typename PrintableType, typename TypeX>
   static void pairPrint(pair<TypeX, TypeX> a,
-                        function<PrinitableType(TypeX)> getVal) {
+                        function<PrintableType(TypeX)> getVal) {
     cout << "<" << getVal(a.first) << ", " << getVal(a.second) << ">";
   }
-  template <typename PrinitableType, typename TypeX>
+  template <typename PrintableType, typename TypeX>
   static void pairPrint(pair<TypeX, TypeX> a,
-                        function<PrinitableType(TypeX)> getVal,
+                        function<PrintableType(TypeX)> getVal,
                         function<bool(TypeX)> canGetVal) {
     cout << "<";
     if (canGetVal(a.first))
@@ -69,6 +69,26 @@ class Output {
     else
       cout << "_";
     cout << ">";
+  }
+  template <typename PrintableType>
+  static void mapPrint(map<PrintableType, PrintableType> a) {
+    cout << "{";
+    for (auto it = a.begin(); it != a.end(); it++) {
+      if (it == a.end() - 1) {
+        cout << it->first << ": " << it->second;
+      } else {
+        cout << it->first << ": " << it->second << ", ";
+      }
+    }
+    cout << "}";
+  }
+  template <typename PrintableType1, typename PrintableType2>
+  static void mapPrint(map<PrintableType1, PrintableType2> a) {
+    cout << "{";
+    for (auto it = a.begin(); it != a.end(); it++) {
+      cout << it->first << ": " << it->second << ", ";
+    }
+    cout << "}";
   }
   template <typename PrintableType>
   static void vectorPrint(vector<PrintableType> a) {
