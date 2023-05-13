@@ -1,4 +1,5 @@
 #include "../modules/index.h"
+#define ITERATIONS 50
 class Solution {
  public:
   unordered_map<char, int> getFingerprint(string s) {
@@ -54,41 +55,32 @@ class Optimal {
 int test(vector<string>& x) {
   Solution s = Solution();
   Optimal o = Optimal();
-  Timer t = Timer();
-  int duration;
 
   cout << "\nX (size = " << x.size() << ") = \t";
   Output::vectorPrint(x);
   cout << endl;
 
-  vector<vector<string>> result;
-  t.startClock();
-  vector<string> x1(x.begin(), x.end());
-  result = s.groupAnagrams(x1);
-  duration = t.stopClock();
+  auto result =
+      measureMethodPerformance(ITERATIONS, &Solution::groupAnagrams, s, x);
 
   cout << "\tGroup Anagrams (mine), result = \t";
   cout << "(";
-  for (int i = 0; i < result.size(); i++) {
-    Output::vectorPrint(result[i]);
+  for (int i = 0; i < result.second.size(); i++) {
+    Output::vectorPrint(result.second[i]);
     cout << ", ";
   }
   cout << ")" << endl;
-  cout << "\t\t\t\tTime Taken: " << duration << endl;
+  cout << "\t\t\t\tTime Taken: " << result.first << endl;
 
-  t.startClock();
-  vector<string> x2(x.begin(), x.end());
-  result = o.groupAnagrams(x2);
-  duration = t.stopClock();
-
+  result = measureMethodPerformance(ITERATIONS, &Optimal::groupAnagrams, o, x);
   cout << "\tGroup Anagrams (optimal), result = \t";
   cout << "(";
-  for (int i = 0; i < result.size(); i++) {
-    Output::vectorPrint(result[i]);
+  for (int i = 0; i < result.second.size(); i++) {
+    Output::vectorPrint(result.second[i]);
     cout << ", ";
   }
   cout << ")" << endl;
-  cout << "\t\t\t\tTime Taken: " << duration << endl;
+  cout << "\t\t\t\tTime Taken: " << result.first << endl;
   return 0;
 }
 int main() {

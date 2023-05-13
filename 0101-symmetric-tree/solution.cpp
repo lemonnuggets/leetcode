@@ -1,4 +1,5 @@
 #include "../modules/index.h"
+#define ITERATIONS 50
 // auto getVal = [](TreeNode* T) { return T->val; };
 // auto canGetVal = [](TreeNode* T) { return T != nullptr; };
 // void logPair(string action, pair<TreeNode*, TreeNode*> P) {
@@ -57,9 +58,6 @@ class Solution {
 };
 
 int test(vector<int>& x) {
-  Timer t = Timer();
-  int duration;
-
   cout << "\nX (size = " << x.size() << ") = \t";
   Output::vectorPrint(x);
   cout << endl;
@@ -71,21 +69,16 @@ int test(vector<int>& x) {
   cout << "Tree from x, root = " << endl;
   Output::treePrint(root);
 
-  bool result;
+  auto result = measureFunctionPerformance(
+      ITERATIONS, Solution::Recursive::isSymmetric, root);
 
-  t.startClock();
-  result = Solution::Recursive::isSymmetric(root);
-  duration = t.stopClock();
+  cout << "\tisSymmetric (recursive), result = " << result.second;
+  cout << "\t\t\t\tTime Taken: " << result.first << endl;
 
-  cout << "\tisSymmetric (recursive), result = " << result;
-  cout << "\t\t\t\tTime Taken: " << duration << endl;
-
-  t.startClock();
-  result = Solution::Iterative::isSymmetric(root);
-  duration = t.stopClock();
-
-  cout << "\tisSymmetric (iterative), result = " << result;
-  cout << "\t\t\t\tTime Taken: " << duration << endl;
+  result = measureFunctionPerformance(ITERATIONS,
+                                      Solution::Iterative::isSymmetric, root);
+  cout << "\tisSymmetric (iterative), result = " << result.second;
+  cout << "\t\t\t\tTime Taken: " << result.first << endl;
   return 0;
 }
 int main() {

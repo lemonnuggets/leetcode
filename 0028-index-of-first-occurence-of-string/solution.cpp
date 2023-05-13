@@ -59,14 +59,14 @@ int test(string haystack, string needle) {
   cout << "\nNeedle (size = " << needle.size() << ") = \t";
   cout << needle << endl;
 
-  auto result = measureFunctionPerformance(ITERATIONS, &Solution::strStr, s,
-                                           haystack, needle);
+  auto result = measureMethodPerformance(ITERATIONS, &Solution::strStr, s,
+                                         haystack, needle);
   cout << "\tStrStr (mine), result = \t";
   cout << result.second << endl;
   cout << "\t\t\t\tTime Taken: " << result.first << endl;
 
-  result = measureFunctionPerformance(ITERATIONS, &Optimal::strStr, o, haystack,
-                                      needle);
+  result = measureMethodPerformance(ITERATIONS, &Optimal::strStr, o, haystack,
+                                    needle);
   cout << "\tStrStr (optimal), result = \t";
   cout << result.second << endl;
   cout << "\t\t\t\tTime Taken: " << result.first << endl;

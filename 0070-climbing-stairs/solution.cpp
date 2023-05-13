@@ -1,4 +1,5 @@
 #include "../modules/index.h"
+#define ITERATIONS 50
 class Solution {
  private:
   vector<int> fib = {0, 0, 1};
@@ -15,15 +16,12 @@ class Solution {
 
 int test(int x) {
   Solution s = Solution();
-  Timer t = Timer();
-  int duration;
   cout << "\nX = " << x << endl;
 
-  t.startClock();
-  int r1 = s.climbStairs(x);
-  duration = t.stopClock();
-  cout << "\tMyClimbStairs = " << r1 << "\t\t\t\tTime Taken: " << duration
-       << endl;
+  auto result =
+      measureMethodPerformance(ITERATIONS, &Solution::climbStairs, s, x);
+  cout << "\tMyClimbStairs = " << result.second
+       << "\t\t\t\tTime Taken: " << result.first << endl;
 
   return 0;
 }

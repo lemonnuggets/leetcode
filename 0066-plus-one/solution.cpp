@@ -1,7 +1,10 @@
 #include "../modules/index.h"
+#define ITERATIONS 50
 class Solution {
  public:
-  vector<int> plusOne(vector<int>& digits) {
+  vector<int> plusOne(const vector<int>& d) {
+    // create a copy of the input vector
+    vector<int> digits = d;
     int carry = 1;
     for (auto it = digits.end() - 1; it != digits.begin() - 1; it--) {
       int sum = carry + *it;
@@ -19,7 +22,9 @@ class Solution {
 };
 class Optimal {
  public:
-  vector<int> plusOne(vector<int>& digits) {
+  vector<int> plusOne(const vector<int>& d) {
+    // create a copy of the input vector
+    vector<int> digits = d;
     int n = digits.size() - 1;
 
     for (int i = n; i >= 0; --i) {
@@ -48,31 +53,20 @@ class Optimal {
 int test(vector<int>& x) {
   Solution s = Solution();
   Optimal o = Optimal();
-  Timer t = Timer();
-  int duration;
 
   cout << "\nX (size = " << x.size() << ") = \t";
   Output::vectorPrint(x);
   cout << endl;
 
-  vector<int> result;
-  t.startClock();
-  vector<int> x1(x.begin(), x.end());
-  result = s.plusOne(x1);
-  duration = t.stopClock();
-
+  auto result = measureMethodPerformance(ITERATIONS, &Solution::plusOne, s, x);
   cout << "\tPlus One (mine), result = \t";
-  Output::vectorPrint(result);
-  cout << "\t\t\t\tTime Taken: " << duration << endl;
+  Output::vectorPrint(result.second);
+  cout << "\t\t\t\tTime Taken: " << result.first << endl;
 
-  t.startClock();
-  vector<int> x2(x.begin(), x.end());
-  result = o.plusOne(x2);
-  duration = t.stopClock();
-
+  result = measureMethodPerformance(ITERATIONS, &Optimal::plusOne, o, x);
   cout << "\tPlus One (optimal), result = \t";
-  Output::vectorPrint(result);
-  cout << "\t\t\t\tTime Taken: " << duration << endl;
+  Output::vectorPrint(result.second);
+  cout << "\t\t\t\tTime Taken: " << result.first << endl;
   return 0;
 }
 int main() {

@@ -1,3 +1,4 @@
+#pragma once
 #include "imports.h"
 using namespace std::chrono;
 class Timer {

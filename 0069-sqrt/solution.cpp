@@ -1,4 +1,5 @@
 #include "../modules/index.h"
+#define ITERATIONS 50
 class Solution {
  public:
   int sq(int x) { return x * x; }
@@ -20,19 +21,16 @@ class Solution {
 
 int test(int x) {
   Solution s = Solution();
-  Timer t = Timer();
-  int duration;
   cout << "\nX = " << x << endl;
 
-  t.startClock();
-  int r1 = s.mySqrt(x);
-  duration = t.stopClock();
-  cout << "\tMySqrt = " << r1 << "\tTime Taken: " << duration << endl;
+  auto result = measureMethodPerformance(ITERATIONS, &Solution::mySqrt, s, x);
+  cout << "\tMySqrt = " << result.second << "\tTime Taken: " << result.first
+       << endl;
 
-  t.startClock();
-  int r2 = sqrt(x);
-  duration = t.stopClock();
-  cout << "\tSqrt = " << r2 << "\tTime Taken: " << duration << endl;
+  auto sqrtFunction = [](int x) { return sqrt(x); };
+  result = measureFunctionPerformance(ITERATIONS, sqrtFunction, x);
+  cout << "\tSqrt = " << result.second << "\tTime Taken: " << result.first
+       << endl;
 
   return 0;
 }

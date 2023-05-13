@@ -1,4 +1,10 @@
 #include "../modules/index.h"
+#include "../modules/timer.h"
+
+// Cannot use measureObjFunctionPerformance() because
+// Solution::merge() modifies the input array
+// and therefore running the function multiple times
+// will give different results.
 class Solution {
  public:
   void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {

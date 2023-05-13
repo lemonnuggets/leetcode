@@ -1,7 +1,18 @@
 #include "../modules/index.h"
+#define ITERATIONS 50
 class Solution {
  public:
-  vector<int> inorderTraversalRecursive(TreeNode* root) {
+  TreeNode* copy(TreeNode* root) {
+    if (root == nullptr) {
+      return nullptr;
+    }
+    TreeNode* newRoot = new TreeNode(root->val);
+    newRoot->left = copy(root->left);
+    newRoot->right = copy(root->right);
+    return newRoot;
+  }
+  vector<int> inorderTraversalRecursive(TreeNode* r) {
+    TreeNode* root = copy(r);
     vector<int> result;
     if (root == nullptr) {
       result = {};
@@ -13,7 +24,8 @@ class Solution {
     }
     return result;
   }
-  vector<int> inorderTraversalIterative(TreeNode* root) {
+  vector<int> inorderTraversalIterative(TreeNode* r) {
+    TreeNode* root = copy(r);
     vector<int> nodes;
     stack<TreeNode*> todo;
     while (root || !todo.empty()) {
@@ -35,12 +47,11 @@ class Solution {
 
 int test(vector<int>& x) {
   Solution s = Solution();
-  Timer t = Timer();
-  int duration;
 
   cout << "\nX (size = " << x.size() << ") = \t";
   Output::vectorPrint(x);
   cout << endl;
+
   TreeNode* root;
   if (x.size() > 0)
     root = new TreeNode(x);
@@ -49,22 +60,17 @@ int test(vector<int>& x) {
   cout << "Tree from x, root = " << endl;
   Output::treePrint(root);
 
-  vector<int> result;
-  t.startClock();
-  result = s.inorderTraversalRecursive(root);
-  duration = t.stopClock();
-
+  auto result = measureMethodPerformance(
+      ITERATIONS, &Solution::inorderTraversalRecursive, s, root);
   cout << "\tInorder Traversal (recursive), result = \t";
-  Output::vectorPrint(result);
-  cout << "\t\t\t\tTime Taken: " << duration << endl;
+  Output::vectorPrint(result.second);
+  cout << "\t\t\t\tTime Taken: " << result.first << endl;
 
-  t.startClock();
-  result = s.inorderTraversalIterative(root);
-  duration = t.stopClock();
-
+  result = measureMethodPerformance(
+      ITERATIONS, &Solution::inorderTraversalIterative, s, root);
   cout << "\tInorder Traversal (iterative), result = \t";
-  Output::vectorPrint(result);
-  cout << "\t\t\t\tTime Taken: " << duration << endl;
+  Output::vectorPrint(result.second);
+  cout << "\t\t\t\tTime Taken: " << result.first << endl;
   return 0;
 }
 int main() {

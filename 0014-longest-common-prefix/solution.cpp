@@ -1,4 +1,5 @@
 #include "../modules/index.h"
+#define ITERATIONS 50
 class Solution {
  public:
   string longestCommonPrefix(vector<string>& strs) {
@@ -19,19 +20,16 @@ class Solution {
 };
 int test(vector<string>& x) {
   Solution s = Solution();
-  Timer t = Timer();
-  int duration;
 
   cout << "\nX = ";
   Output::vectorPrint(x);
   cout << endl;
 
-  t.startClock();
-  string prefix = s.longestCommonPrefix(x);
-  duration = t.stopClock();
+  auto result = measureMethodPerformance(ITERATIONS,
+                                         &Solution::longestCommonPrefix, s, x);
 
-  cout << "\tLongest Common Prefix = " << prefix
-       << "\t\tTime Taken: " << duration << endl;
+  cout << "\tLongest Common Prefix = " << result.second
+       << "\t\tTime Taken: " << result.first << endl;
   return 0;
 }
 int main() {

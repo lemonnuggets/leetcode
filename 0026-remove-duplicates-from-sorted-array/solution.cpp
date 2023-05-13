@@ -1,4 +1,5 @@
 #include "../modules/index.h"
+#define ITERATIONS 50
 class Solution {
  public:
   int removeDuplicates(vector<int>& nums) {
@@ -13,18 +14,16 @@ class Solution {
 };
 int test(vector<int>& x) {
   Solution s = Solution();
-  Timer t = Timer();
-  int duration;
 
   cout << "\nX (size = " << x.size() << ") = \t";
   Output::vectorPrint(x);
   cout << endl;
 
-  t.startClock();
-  int r1 = s.removeDuplicates(x);
-  duration = t.stopClock();
-  cout << "\tMyClimbStairs = " << r1 << "\t\t\t\tTime Taken: " << duration
-       << endl;
+  auto result =
+      measureMethodPerformance(ITERATIONS, &Solution::removeDuplicates, s, x);
+
+  cout << "\tMyClimbStairs = " << result.second
+       << "\t\t\t\tTime Taken: " << result.first << endl;
 
   return 0;
 }

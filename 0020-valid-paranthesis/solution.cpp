@@ -1,4 +1,5 @@
 #include "../modules/index.h"
+#define ITERATIONS 50
 // using stack data structure from c++ stl
 class Solution {
  public:
@@ -29,16 +30,15 @@ class Solution {
 };
 int test(string str) {
   Solution s = Solution();
-  Timer t = Timer();
   int duration;
 
   cout << "\nStr = " << str << endl;
 
-  t.startClock();
-  bool valid = s.isValid(str);
-  duration = t.stopClock();
+  auto result =
+      measureMethodPerformance(ITERATIONS, &Solution::isValid, s, str);
 
-  cout << "\tTime Taken: " << duration << "\t\tisValid = " << valid << endl;
+  cout << "\tTime Taken: " << result.first << "\t\tisValid = " << result.second
+       << endl;
   return 0;
 }
 int main(int argc, char const *argv[]) {

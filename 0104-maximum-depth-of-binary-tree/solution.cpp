@@ -1,5 +1,6 @@
 
 #include "../modules/index.h"
+#define ITERATIONS 50
 class Solution {
  public:
   int maxDepth(TreeNode* root) {
@@ -10,8 +11,6 @@ class Solution {
 
 int test(vector<int>& x) {
   Solution s = Solution();
-  Timer t = Timer();
-  int duration;
 
   cout << "\nX (size = " << x.size() << ") = \t";
   Output::vectorPrint(x);
@@ -24,14 +23,10 @@ int test(vector<int>& x) {
   cout << "Tree from x, root = " << endl;
   Output::treePrint(root);
 
-  int result;
-
-  t.startClock();
-  result = s.maxDepth(root);
-  duration = t.stopClock();
-
-  cout << "\tMaxDepth (recursive), result = " << result;
-  cout << "\t\t\t\tTime Taken: " << duration << endl;
+  auto result =
+      measureMethodPerformance(ITERATIONS, &Solution::maxDepth, s, root);
+  cout << "\tMaxDepth (recursive), result = " << result.second;
+  cout << "\t\t\t\tTime Taken: " << result.first << endl;
   return 0;
 }
 int main() {

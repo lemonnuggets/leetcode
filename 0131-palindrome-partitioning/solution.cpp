@@ -1,4 +1,5 @@
 #include "../modules/index.h"
+#define ITERATIONS 50
 class Solution {
   map<string, vector<vector<string>>> seen;
 
@@ -36,21 +37,21 @@ class Optimal {
   vector<vector<string>> partition(string s) {
     vector<vector<string>> pars;
     vector<string> par;
-    partition(s, 0, par, pars);
+    privPartition(s, 0, par, pars);
     return pars;
   }
 
  private:
-  void partition(string& s, int start, vector<string>& par,
-                 vector<vector<string>>& pars) {
+  void privPartition(string& s, int start, vector<string>& par,
+                     vector<vector<string>>& partitions) {
     int n = s.length();
     if (start == n) {
-      pars.push_back(par);
+      partitions.push_back(par);
     } else {
       for (int i = start; i < n; i++) {
         if (isPalindrome(s, start, i)) {
           par.push_back(s.substr(start, i - start + 1));
-          partition(s, i + 1, par, pars);
+          privPartition(s, i + 1, par, partitions);
           par.pop_back();
         }
       }
@@ -69,41 +70,30 @@ class Optimal {
 int test(string x) {
   Solution s = Solution();
   Optimal o = Optimal();
-  Timer t = Timer();
-  int duration;
 
   cout << "\nX (size = " << x.size() << ") = \t";
   cout << x << endl;
 
-  vector<vector<string>> result;
-  t.startClock();
-  string x1(x.begin(), x.end());
-  // vector<string> x1(x.begin(), x.end());
-  result = s.partition(x1);
-  duration = t.stopClock();
-
+  auto result =
+      measureMethodPerformance(ITERATIONS, &Solution::partition, s, x);
   cout << "\tPartitioned Palindromes (mine), result = \t";
   cout << "(";
-  for (int i = 0; i < result.size(); i++) {
-    Output::vectorPrint(result[i]);
+  for (int i = 0; i < result.second.size(); i++) {
+    Output::vectorPrint(result.second[i]);
     cout << ", ";
   }
   cout << ")" << endl;
-  cout << "\t\t\t\tTime Taken: " << duration << endl;
+  cout << "\t\t\t\tTime Taken: " << result.first << endl;
 
-  t.startClock();
-  string x2(x.begin(), x.end());
-  result = o.partition(x2);
-  duration = t.stopClock();
-
+  result = measureMethodPerformance(ITERATIONS, &Optimal::partition, o, x);
   cout << "\tPartitioned Palindromes (optimal), result = \t";
   cout << "(";
-  for (int i = 0; i < result.size(); i++) {
-    Output::vectorPrint(result[i]);
+  for (int i = 0; i < result.second.size(); i++) {
+    Output::vectorPrint(result.second[i]);
     cout << ", ";
   }
   cout << ")" << endl;
-  cout << "\t\t\t\tTime Taken: " << duration << endl;
+  cout << "\t\t\t\tTime Taken: " << result.first << endl;
   return 0;
 }
 int main() {

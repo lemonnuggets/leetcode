@@ -1,10 +1,24 @@
 #include "../modules/index.h"
+#define ITERATIONS 2
 class Solution {
  public:
-  ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-    if (list1 == nullptr) return list2;
-    if (list2 == nullptr) return list1;
-    ListNode* newHead;
+  ListNode* copy(ListNode* l) {
+    ListNode* newHead = new ListNode(l->val);
+    ListNode* curr = newHead;
+    ListNode* currL = l;
+    while (currL->next != nullptr) {
+      curr->next = new ListNode(currL->next->val);
+      curr = curr->next;
+      currL = currL->next;
+    }
+    return newHead;
+  }
+  ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+    // if used without copy(), l1 and l2 will be modified
+    // leading to an infinite loop if function is called
+    // again with same l1 and l2.
+    ListNode *list1 = copy(l1), *list2 = copy(l2);
+    ListNode* newHead = nullptr;
     if (list1->val < list2->val) {
       newHead = list1;
       list1 = list1->next;
@@ -13,6 +27,7 @@ class Solution {
       list2 = list2->next;
     }
     ListNode* curr = newHead;
+
     while (!(list1 == nullptr && list2 == nullptr)) {
       if (list1 == nullptr || (list2 != nullptr && list2->val < list1->val)) {
         curr->next = list2;
@@ -28,8 +43,6 @@ class Solution {
 };
 int test(vector<int>& x, vector<int>& y) {
   Solution s = Solution();
-  Timer t = Timer();
-  int duration;
 
   ListNode* x_list = new ListNode(x);
   ListNode* y_list = new ListNode(y);
@@ -41,12 +54,11 @@ int test(vector<int>& x, vector<int>& y) {
   Output::listPrint(y_list);
   cout << endl;
 
-  t.startClock();
-  ListNode* merged_list = s.mergeTwoLists(x_list, y_list);
-  duration = t.stopClock();
+  auto result = measureMethodPerformance(ITERATIONS, &Solution::mergeTwoLists,
+                                         s, x_list, y_list);
 
-  cout << "\tTime Taken: " << duration << "\t\tMerged List = \t";
-  Output::listPrint(merged_list);
+  cout << "\tTime Taken: " << result.first << "\t\tMerged List = \t";
+  Output::listPrint(result.second);
   cout << endl;
 
   return 0;
