@@ -37,25 +37,17 @@ class Solution {
 class Optimal {
  private:
   void inner_permute(vector<vector<int>>& permutations, vector<int>& nums,
-                     int start, int end) {
-    if (end < start || end > nums.size()) return;
-    if (end == start) {
+                     int start) {
+    int end = nums.size() - 1;
+    if (end <= start) {
       permutations.push_back(nums);
-      return;
-    }
-    if (end - start == 1) {
-      permutations.push_back(nums);
-      swap(nums[start], nums[end]);
-      permutations.push_back(nums);
-      swap(nums[start], nums[end]);
       return;
     }
 
-    inner_permute(permutations, nums, start + 1, end);
-    int j = start + 1;
+    int j = start;
     while (j <= end) {
       swap(nums[start], nums[j]);
-      inner_permute(permutations, nums, start + 1, end);
+      inner_permute(permutations, nums, start + 1);
       swap(nums[start], nums[j]);
       j++;
     }
@@ -70,7 +62,7 @@ class Optimal {
       required_size *= n--;
     }
     permutations.reserve(required_size);
-    inner_permute(permutations, nums, 0, nums.size() - 1);
+    inner_permute(permutations, nums, 0);
     return permutations;
   }
 };
