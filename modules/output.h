@@ -91,6 +91,20 @@ class Output {
     cout << "}";
   }
   template <typename PrintableType>
+  static void vectorPrint(vector<vector<PrintableType>> a) {
+    cout << "[";
+    for (auto it = a.begin(); it != a.end(); it++) {
+      if (it == a.end() - 1) {
+        vectorPrint(*it);
+        // cout << *it;
+      } else {
+        vectorPrint(*it);
+        cout << ", ";
+      }
+    }
+    cout << "]";
+  }
+  template <typename PrintableType>
   static void vectorPrint(vector<PrintableType> a) {
     cout << "[";
     for (auto it = a.begin(); it != a.end(); it++) {
