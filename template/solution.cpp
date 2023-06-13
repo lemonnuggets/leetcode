@@ -1,5 +1,11 @@
 #include "../modules/index.h"
 #define ITERATIONS 50
+static auto _ = []() {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  cout.tie(nullptr);
+  return nullptr;
+}();
 class Solution {
  public:
   void func(void) {}
