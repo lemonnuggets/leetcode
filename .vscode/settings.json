@@ -3,7 +3,8 @@
     "*.html": "html",
     "ostream": "cpp",
     "cmath": "cpp",
-    "complex": "cpp"
+    "complex": "cpp",
+    "functional": "cpp"
   },
   "cSpell.words": ["leetcode"]
 }
