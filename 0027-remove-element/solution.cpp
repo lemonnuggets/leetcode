@@ -31,6 +31,8 @@ class Optimal {
   int removeElement(vector<int>& nums, int val) {
     int cnt = 0;
     for (int i = 0; i < nums.size(); i++) {
+      // no need to swap. just keep track of the count of non-val elements
+      // and copy them to the front of the array
       if (nums[i] != val) nums[cnt++] = nums[i];
     }
     return cnt;
