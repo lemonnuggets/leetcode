@@ -58,6 +58,8 @@ class Optimal {
       lvl++;
       int size = q.size();
       int sum = 0;
+      // instead of keeping track of number of nodes in current and next level
+      // here it clears all elements in a single level using a for loop.
       for (int i = 0; i < size; i++) {
         auto node = q.front();
         q.pop();
