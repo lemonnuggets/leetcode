@@ -34,10 +34,7 @@ class Optimal {
     int maxJump = INT_MIN;
     int jumps = 0;
     for (int i = 0; i <= reachable && reachable < n - 1; i++) {
-      int currJump = i + nums[i];
-      if (currJump > maxJump) {
-        maxJump = currJump;
-      }
+      maxJump = max(maxJump, i + nums[i]);
       if (i == reachable) {
         reachable = maxJump;
         jumps++;
