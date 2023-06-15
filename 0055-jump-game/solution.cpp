@@ -44,12 +44,12 @@ int test(vector<int>& nums) {
 
   pair<double, bool> result =
       measureMethodPerformance(ITERATIONS, &Solution::canJump, s, nums);
-  cout << "\tMax Profit (mine), result = \t";
+  cout << "\tCan Jump (mine), result = \t";
   cout << result.second << endl;
   cout << "\t\t\t\tTime Taken: " << result.first << endl;
 
   result = measureMethodPerformance(ITERATIONS, &Optimal::canJump, o, nums);
-  cout << "\tMax Profit (optimal), result = \t";
+  cout << "\tCan Jump (optimal), result = \t";
   cout << result.second << endl;
   cout << "\t\t\t\tTime Taken: " << result.first << endl;
 
