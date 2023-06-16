@@ -5,7 +5,21 @@
     "cmath": "cpp",
     "complex": "cpp",
     "functional": "cpp",
-    "stdexcept": "cpp"
+    "stdexcept": "cpp",
+    "cstdio": "cpp",
+    "any": "cpp",
+    "*.tcc": "cpp",
+    "forward_list": "cpp",
+    "list": "cpp",
+    "deque": "cpp",
+    "string": "cpp",
+    "vector": "cpp",
+    "slist": "cpp",
+    "*.inc": "cpp",
+    "hash_map": "cpp",
+    "unordered_map": "cpp",
+    "unordered_set": "cpp",
+    "hash_set": "cpp"
   },
   "cSpell.words": ["leetcode", "nums"]
 }

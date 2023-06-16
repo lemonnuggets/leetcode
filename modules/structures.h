@@ -69,3 +69,130 @@ class ListNode {
     return;
   }
 };
+
+template <typename T>
+class RingArray {
+  static const int STARTING_CAPACITY = 10;
+  static const int GROWTH_FACTOR = 2;
+  static int mod(int a, int b) { return (a % b + b) % b; }
+
+  T* arr;
+  int lo, hi, capacity;
+  int getActualIndex(int index) { return (this->lo + index) % this->capacity; }
+  int getApparentIndex(int index) {
+    if (index >= this->lo) return index - this->lo;
+    return index + (this->capacity - this->lo);
+  }
+  void insertInitial(T val) {
+    this->lo = 0;
+    this->hi = 0;
+    this->arr[this->hi++] = val;
+  }
+  void grow() {
+    int newCapacity = capacity * GROWTH_FACTOR;
+    T* newArr = (T*)malloc(newCapacity * sizeof(T));
+    int newLo = 0, newHi = 0;
+    for (int i = 0; i < size(); i++) {
+      newArr[newHi++] = this->get(i);
+    }
+
+    this->lo = newLo;
+    this->hi = newHi;
+    this->capacity = newCapacity;
+    free(this->arr);
+    this->arr = newArr;
+  }
+
+ public:
+  RingArray() {
+    this->arr = (T*)malloc(STARTING_CAPACITY * sizeof(T));
+    this->capacity = STARTING_CAPACITY;
+    this->makeEmpty();
+  }
+  bool isEmpty() {
+    if (this->lo == this->hi && this->lo == -1) {
+      return true;
+    }
+    return false;
+  }
+  void makeEmpty() {
+    this->lo = -1;
+    this->hi = -1;
+  }
+  int size() {
+    if (this->isEmpty()) return 0;
+    if (this->lo == this->hi) return capacity;
+    return this->getApparentIndex(hi);
+  }
+  void set(int index, int value) {
+    if (index >= this->size()) {
+      throw out_of_range("Index is out of range");
+    }
+    this->arr[getActualIndex(index)] = value;
+  }
+  T get(int index) {
+    if (index >= this->size()) {
+      throw out_of_range("Index is out of range");
+    }
+    return arr[getActualIndex(index)];
+  }
+  void push_back(T val) {
+    // cout << "push_back " << val << "\n";
+    if (this->isEmpty()) {
+      return insertInitial(val);
+    }
+    if (this->size() >= this->capacity) {
+      this->grow();
+    }
+    this->lo = mod(this->lo - 1, capacity);
+    this->arr[this->lo] = val;
+  }
+  void push_front(T val) {
+    // cout << "push_front " << val << "\n";
+    if (this->isEmpty()) {
+      return insertInitial(val);
+    }
+    if (this->size() >= this->capacity) {
+      this->grow();
+    }
+    this->arr[this->hi] = val;
+    this->hi = mod(this->hi + 1, capacity);
+  }
+  T pop_front() {
+    // cout << "pop_front" << endl;
+    if (this->isEmpty()) {
+      return NULL;
+    }
+    T front = this->arr[this->lo];
+    this->lo = mod(this->lo + 1, capacity);
+    if (this->lo == this->hi) {
+      this->makeEmpty();
+    }
+    return front;
+  }
+  T pop_back() {
+    // cout << "pop_back" << endl;
+    if (this->isEmpty()) {
+      return NULL;
+    }
+    T back = this->arr[this->hi];
+    this->hi = mod(this->hi - 1, capacity);
+    if (this->lo == this->hi) {
+      this->makeEmpty();
+    }
+    return back;
+  }
+  string toString() {
+    if (this->size() <= 0) return "<empty>";
+    string result = "(size = " + to_string(this->size()) +
+                    ", capacity = " + to_string(this->capacity) + ")\t";
+    result += "[";
+    for (int i = 0; i < this->size() - 1; i++) {
+      result += to_string(this->get(i)) + ", ";
+      // cout << this->get(i) << ", ";
+    }
+    result += to_string(this->get(this->size() - 1));
+    result += "]";
+    return result;
+  }
+};
