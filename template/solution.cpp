@@ -24,7 +24,7 @@ int test(string argument) {
 
   auto result =
       measureMethodPerformance(ITERATIONS, &Solution::func, s, argument);
-  cout << "\tFunc (mine), result = \t";
+  cout << "\tFunc (mine), result = \t\t";
   cout << result.second << endl;
   cout << "\t\t\t\tTime Taken: " << result.first << endl;
 
