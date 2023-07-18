@@ -56,3 +56,7 @@ URL: <https://leetcode.com/studyplan/top-interview-150/>
 - 1187-make-array-strictly-increasing
 - 1569-number-of-ways-to-reorder-array-to-get-same-bst
 - 2328-number-of-increasing-paths-in-a-grid
+
+## Completed
+
+![Completed problems grid](./assets/grid.png)

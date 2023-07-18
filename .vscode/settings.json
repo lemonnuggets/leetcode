@@ -97,5 +97,9 @@
     "valarray": "cpp",
     "variant": "cpp"
   },
-  "cSpell.words": ["leetcode", "nums"]
+  "cSpell.words": ["leetcode", "nums"],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "python.formatting.provider": "none"
 }
