@@ -60,3 +60,5 @@ URL: <https://leetcode.com/studyplan/top-interview-150/>
 ## Completed
 
 ![Completed problems grid](./assets/grid.png)
+
+Generated using `scripts/precommit.sh` invoked via precommit hook.
