@@ -91,6 +91,33 @@ class Output {
     cout << "}";
   }
   template <typename PrintableType>
+  static void matrixPrint(vector<vector<PrintableType>> a, int numTabs = 1) {
+    for (int i = 0; i < numTabs; i++) {
+      cout << "\t";
+    }
+    cout << "[";
+    cout << endl;
+    for (int i = 0; i < numTabs + 1; i++) {
+      cout << "\t";
+    }
+    for (auto it = a.begin(); it != a.end(); it++) {
+      if (it == a.end() - 1) {
+        vectorPrint(*it);
+      } else {
+        vectorPrint(*it);
+        cout << ",\n";
+        for (int i = 0; i < numTabs + 1; i++) {
+          cout << "\t";
+        }
+      }
+    }
+    cout << endl;
+    for (int i = 0; i < numTabs; i++) {
+      cout << "\t";
+    }
+    cout << "]";
+  }
+  template <typename PrintableType>
   static void vectorPrint(vector<vector<PrintableType>> a) {
     cout << "[";
     for (auto it = a.begin(); it != a.end(); it++) {
