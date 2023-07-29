@@ -59,8 +59,9 @@ class Optimal {
     }
     for (int i = 0; i < m; ++i)
       for (int j = 0; j < n; ++j) {
-        board[i][j] >>= 1;  // replace the old state with the new state by
-                            // shifting all values one bit to the right
+        // replace the old state with the new state by
+        // shifting all values one bit to the right
+        board[i][j] >>= 1;
       }
   }
 };
